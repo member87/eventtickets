@@ -165,9 +165,6 @@ async function main() {
 
   for (const artist in artists) {
     const events: string[] = artists[artist]
-    console.log(artist, events)
-
-
     const artistRecord = await prisma.artist.upsert({
       where: {
         name: artist,
@@ -183,27 +180,28 @@ async function main() {
     /**
      * Create random events from aritsts and location. Multiple of same events are created at different locations
      */
-    artists[artist].forEach((eventName: string) => {
-      events.forEach(async (event: string) => {
-        for (let i = 0; i < getRandomInt(5) + 1; i++) {
-          const location = getRandom(await prisma.location.findMany())
-          await prisma.event.upsert({
-            where: {
-              event_identifier: {
-                locationId: location.id,
-                name: eventName
-              }
-            },
-            update: {},
-            create: {
-              artistId: artistRecord.id,
+    artists[artist].forEach(async (eventName: string) => {
+      for (let i = 0; i < getRandomInt(5) + 1; i++) {
+        const location = getRandom(await prisma.location.findMany())
+
+        console.log(i, location.id, eventName, artist)
+
+        await prisma.event.upsert({
+          where: {
+            event_identifier: {
               locationId: location.id,
-              name: eventName,
-              time: 0,
+              name: eventName
             }
-          })
-        }
-      })
+          },
+          update: {},
+          create: {
+            artistId: artistRecord.id,
+            locationId: location.id,
+            name: eventName,
+            time: 0,
+          }
+        })
+      }
     })
 
   }
