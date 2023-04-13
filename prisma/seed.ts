@@ -6,17 +6,33 @@ const venues: { [key: string]: string[] } = {
   "London": [
     "O2",
     "Wembely"
+  ],
+  "Manchester": [
+    "Etihad Stadium"
+  ],
+  "Cardiff": [
+    "Principality Stadium"
   ]
 };
 const artists: { [key: string]: string[] } = {
   "Coldplay": [
     "WORLD TOUR",
+    "Music of the Spheres",
+    "Parachutes"
   ],
   "Taylor Swift": [
     "Some Tour",
+    "Midnights",
+    "Lover",
+    "Reputation"
   ],
   "ED Sheeran": [
     "Maths",
+    "+",
+    "="
+  ],
+  "Harry Styles": [
+    "Harrys House"
   ]
 }
 
