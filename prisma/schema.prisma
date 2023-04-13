@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  email     String      @unique
+  Purchases Purchases[]
+}
+
+model Location {
+  id      Int     @id @default(autoincrement())
+  lat     Int
+  long    Int
+  events  Event[]
+  venue   String  @unique
+  city    String
+  country String
+}
+
+model Event {
+  id         Int      @id @default(autoincrement())
+  name       String   
+  location   Location @relation(fields: [locationId], references: [id])
+  locationId Int
+  tickets    Ticket[]
+  artist     Artist   @relation(fields: [artistId], references: [id])
+  artistId   Int      
+  time       BigInt
+
+  @@unique(fields: [name, locationId], name: "event_identifier")
+}
+
+model Ticket {
+  id    Int         @id @default(autoincrement())
+  event Event       @relation(fields: [eventId], references: [id])
+  eventId   Int         
+  seat      String
+  price     Int
+  Purchases Purchases?
+
+  @@unique(fields: [eventId, seat], name: "ticket_identifier")
+}
+
+model Artist {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  genre Genre  @relation(fields: [genreId], references: [id])
+  genreId Int
+  event   Event[]
+}
+
+model Genre {
+  id     Int      @id @default(autoincrement())
+  genre  String   @unique
+  Artist Artist[]
+}
+
+model Purchases {
+  ticketId Int    @unique
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+  userId   Int
+  user     User   @relation(fields: [userId], references: [id])
+
+  @@id([ticketId, userId])
+}
