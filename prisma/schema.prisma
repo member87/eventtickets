@@ -34,7 +34,7 @@ model Event {
   tickets    Ticket[]
   artist     Artist   @relation(fields: [artistId], references: [id])
   artistId   Int      
-  time       BigInt
+  time       DateTime @default(now())
 
   @@unique(fields: [name, locationId], name: "event_identifier")
 }

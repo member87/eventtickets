@@ -116,7 +116,6 @@ async function main() {
             artistId: artistRecord.id,
             locationId: location.id,
             name: eventName,
-            time: 0,
           }
         })
       }
