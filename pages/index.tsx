@@ -1,47 +1,16 @@
-import { prisma } from '@/util/prisma';
-import { Artist } from '@prisma/client';
-import { InferGetStaticPropsType } from 'next'
+import { Page } from '@/components/templates/page';
+import { Events } from '@/components/loop/events/events';
 
 
 
+export default function Home({}) {
 
-export const getServerSideProps = async () => {
-
-  const artists = await prisma.artist.findMany({
-    select: {
-      name: true,
-      event: {
-        select: {
-          name: true,
-          location: true
-        }
-      }
-    }
-  });
-  console.log(artists)
-  return { props: { artists: artists } }
-}
-
-
-
-export default function Home({ artists }: InferGetStaticPropsType<typeof getServerSideProps>) {
-  console.log(artists)
   return (
-    <div>
-      <ul>
-        {artists.map((artist: Artist) => {
-          return (
-            <div>
-              {artist.name}
-              <ul className="ml-5">
-                {artist.event.map((e: string) => {
-                  return (<li>{e.name} - {e.location.venue}</li>)
-                })}
-              </ul>
-            </div>
-          )
-        })}
-      </ul>
-    </div>
+    <Page>
+      <div className='sm:m-3 p-2'>
+        <h1 className='text-3xl font-bold my-2'>Upcoming Events</h1>
+        <Events />
+      </div>
+    </Page>
   )
 }
