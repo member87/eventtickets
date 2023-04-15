@@ -35,7 +35,6 @@ export class Events extends React.Component<Props, State> {
     fetch('/api/v1/events/get?limit=' + (this.props.limit ? this.props.limit : '20'))
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         this.setState({
           events: data.events,
           loaded: true,
@@ -48,7 +47,6 @@ export class Events extends React.Component<Props, State> {
     fetch('/api/v1/events/get?page=' + (this.state.page + 1))
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         this.setState((state) => ({
           events: state.events.concat(data.events),
           page: state.page + 1

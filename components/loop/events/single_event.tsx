@@ -17,9 +17,6 @@ export class SingleEvent extends React.Component<Props, State> {
     super(props);
   }
 
-  componentDidMount(): void {
-    console.log(this.props.event);
-  }
 
   render() {
     return (

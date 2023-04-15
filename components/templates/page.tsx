@@ -2,7 +2,9 @@ import React from "react";
 import { Header } from "@/components/header/header";
 import Head from "next/head";
 
-type Props = {}
+type Props = {
+  children: React.ReactNode;
+}
 
 export class Page extends React.Component<Props> {
   render() {
