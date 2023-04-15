@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
-import { Prisma } from "@prisma/client";
 import {  EventLocation } from "@/api/v1/events/get";
 import { SingleEvent } from "./single_event";
 import Link from "next/link";
@@ -70,7 +68,17 @@ export class Events extends React.Component<Props, State> {
             {this.props.limitList ? (
               <Link href="/events" className="px-10 py-2 w-fit block border uppercase tracking-wide rounded-full mx-auto mt-6 border-slate-700">View all {this.state.count} events</Link>
             ) : (
-              <button onClick={this.loadNextPage} className="px-10 py-2 w-fit block border tracking-wide rounded-full mx-auto mt-6 border-slate-700">Load More</button>
+              <>
+                <div className="text-gray-800 flex flex-col items-center mt-6">
+                  <span>Loaded {this.state.events.length} out of {this.state.count} events</span>
+                  <div className="bg-gray-200 w-full h-1 my-2 max-w-xs rounded-full">
+                    <div className="bg-blue-600 h-full rounded-full" style={{ width: (this.state.events.length / this.state.count) * 100 + "%" }}></div>
+                  </div>
+                </div>
+                {this.state.events.length < this.state.count && (
+                <button onClick={this.loadNextPage} className="px-10 py-2 w-fit block border tracking-wide rounded-full mx-auto mt-6 border-slate-700">Load More</button>
+                )}
+              </>
             )}
           </>
         ) : (

@@ -24,12 +24,13 @@ type ReturnType = {
   count: number
 }
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ReturnType>
 ) {
 
-  const limit = 10;
+  const limit = 20;
   let page = Number(req.query.page);
   if(!page) page = 0;
 

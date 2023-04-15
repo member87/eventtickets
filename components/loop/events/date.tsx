@@ -35,11 +35,11 @@ export class EventDate extends React.Component<Props, State> {
   render() {
     return (
       <>
-        <div className="text-center inline-block w-14">
-          <div className="text-2xl">
+        <div className="text-center inline-block w-14 uppercase">
+          <div className="text-xl">
             {this.state.month}
           </div>
-          <div className="text-xl">
+          <div className="text-lg">
             {this.state.day}
           </div>
         </div>
