@@ -34,7 +34,7 @@ export default async function handler(
   if(!page) page = 0;
 
   let limit = Number(req.query.limit);
-  if(!limit) page = 20;
+  if(!limit) limit = 20;
 
 
   const events = await prisma.event.findMany({
