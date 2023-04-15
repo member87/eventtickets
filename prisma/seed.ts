@@ -88,15 +88,57 @@ async function main() {
    /**
    * Create test music genre
    */
-  await prisma.genre.upsert({
+  const rockPop =await prisma.genre.upsert({
     where: {
-      genre: "Rock"
+      genre: "Rock / Pop"
     },
     update: {},
     create: {
-      genre: "Rock"
+      genre: "Rock / Pop"
     }
   })
+
+  const countyFolk =await prisma.genre.upsert({
+    where: {
+      genre: "Country / Folk"
+    },
+    update: {},
+    create: {
+      genre: "Country / Folk"
+    }
+  })
+
+  const alternativeIndie =await prisma.genre.upsert({
+    where: {
+      genre: "Alternative and Indie"
+    },
+    update: {},
+    create: {
+      genre: "Alternative and Indie"
+    }
+  })
+
+  const classical =await prisma.genre.upsert({
+    where: {
+      genre: "Classical"
+    },
+    update: {},
+    create: {
+      genre: "Classical"
+    }
+  })
+
+  const jazzBlues =await prisma.genre.upsert({
+    where: {
+      genre: "Jazz / Blues"
+    },
+    update: {},
+    create: {
+      genre: "Jazz / Blues"
+    }
+  })
+  
+  const genres = [rockPop, countyFolk, alternativeIndie, classical, jazzBlues];
 
 
   /**
@@ -132,7 +174,7 @@ async function main() {
       update: {},
       create: {
         name: artist,
-        genreId: 1,
+        genreId: getRandom(genres).id,
       }
     })
 
