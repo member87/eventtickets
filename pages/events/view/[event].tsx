@@ -1,9 +1,8 @@
 import { Page } from '@/components/templates/page';
-import { useRouter } from 'next/router'
 import { prisma } from '@/util/prisma';
 import Link from 'next/link';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-
+import { dateToDay, dateToMonth } from '@/util/time';
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -35,25 +34,50 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   })
 
-  console.log(eventData)
+  const eventTime = await prisma.event.findUnique({
+    where: {
+      id: Number(id)
+    },
+    select: {
+      time: true
+    }
+  })
+
+  let timeString = "";
+  if(eventTime) {  
+    const date = new Date(eventTime.time);
+    const dayName = dateToDay(eventTime.time);
+    const dayNum = date.getDate();
+    const month = dateToMonth(eventTime.time);
+    const hour = date.getHours().toString().padStart(2, "0");
+    const minute = date.getMinutes().toString().padStart(2, "0");
+    const year = date.getFullYear();
+    timeString = `${dayName}, ${dayNum} ${month} ${year}, ${hour}:${minute}`;
+  }
 
   return {
-    props: {eventData},
+    props: {
+      eventData,
+      timeString
+    },
   }
 }
 
-export default function Home({eventData}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({eventData, timeString}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <Page>
-      <div className="flex gap-2 ">
-        <Link href="/">Home</Link>
-        <span>/</span>
-        <Link href="/">{eventData.artist.genre.genre}</Link>
-        <span>/</span>
-        <Link href="/">{eventData.artist.name}</Link>
+      <div className='bg-gray-950 text-white p-5'>
+        <div className="flex gap-2 ">
+          <Link href="/">Home</Link>
+          <span>/</span>
+          <Link href="/">{eventData.artist.genre.genre}</Link>
+          <span>/</span>
+          <Link href="/">{eventData.artist.name}</Link>
+        </div>
+        <h1 className='text-xl font-semibold my-2'>{eventData.artist.name}: {eventData.name}</h1>
+        <span>{timeString}</span>
       </div>
       <div className='sm:m-3 p-2'>
-        <h1 className='text-3xl font-bold my-2'></h1>
       </div>
     </Page>
   )

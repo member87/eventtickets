@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { EventLocation } from "@/pages/api/v1/events/get";
+import { dateToDay } from "@/util/time";
 
 type Props = {
   event: EventLocation
@@ -10,7 +11,6 @@ type State = {
   minute: string
 }
 
-const weekday = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"];
 export class EventDayTime extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -23,7 +23,7 @@ export class EventDayTime extends React.Component<Props, State> {
 
   componentDidMount(): void {
     const date = new Date(this.props.event.time);
-    const day = weekday[new Date(date).getDay()];
+    const day = dateToDay(date)
 
     const hour = date.getHours().toString().padStart(2, "0");
     const minute = date.getMinutes().toString().padStart(2, "0");

@@ -39,7 +39,7 @@ export class Events extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="bg-white shadow-xl">
+      <div className="bg-white shadow-xl pb-5">
         {this.state.loaded ? (
           <>
             {this.state.events.map((event: EventLocation) => {
@@ -48,7 +48,7 @@ export class Events extends React.Component<Props, State> {
               )
             })}
 
-            <Link href="/events">View all {this.state.count} events</Link>
+            <Link href="/events" className="px-10 py-2 w-fit block border uppercase tracking-wide rounded-full mx-auto mt-6 border-slate-700">View all {this.state.count} events</Link>
           </>
         ) : (
           <div>Loading...</div>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { EventLocation } from "@/pages/api/v1/events/get";
+import { dateToMonth } from "@/util/time";
 
 type Props = {
   event: EventLocation
@@ -9,9 +10,7 @@ type State = {
   day: string,
 }
 
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
+
 
 export class EventDate extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -24,7 +23,7 @@ export class EventDate extends React.Component<Props, State> {
 
   componentDidMount(): void {
     const date = new Date(this.props.event.time);
-    const month = months[new Date(date).getMonth()];
+    const month = dateToMonth(date);
     const day = date.getDate().toString().padStart(2, "0");
 
     this.setState({
