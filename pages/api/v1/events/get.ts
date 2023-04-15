@@ -30,14 +30,25 @@ export default async function handler(
   res: NextApiResponse<ReturnType>
 ) {
 
+  
   let page = Number(req.query.page);
   if(!page) page = 0;
 
   let limit = Number(req.query.limit);
   if(!limit) limit = 20;
 
+  let genre = Number(req.query.genre);
 
   const events = await prisma.event.findMany({
+    where: genre ? {
+      artist: {
+        is: {
+          genre: {
+            id: genre
+          }
+        }
+      }
+    } : {},
     select: {
       name: true,
       time: true,
@@ -57,7 +68,17 @@ export default async function handler(
     skip: page * limit,
   })
 
-  const count = await prisma.event.count()
+  const count = await prisma.event.count({
+    where: genre ? {
+      artist: {
+        is: {
+          genre: {
+            id: genre
+          }
+        }
+      }
+    } : {},
+  })
 
 
   res.status(200).json({events, count})

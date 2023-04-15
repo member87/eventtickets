@@ -20,6 +20,8 @@ type State = {
 
 
 export class Events extends React.Component<Props, State> {
+  private baseUrl = '/api/v1/events/get?';
+
   constructor(props: Props) {
     super(props);
 
@@ -31,12 +33,15 @@ export class Events extends React.Component<Props, State> {
       loadingMore: false,
     };
 
+    if(this.props.genre) {
+      this.baseUrl += 'genre=' + this.props.genre + '&';
+    }
 
     this.loadNextPage = this.loadNextPage.bind(this);
   }
 
   componentDidMount(): void {
-    fetch('/api/v1/events/get?limit=' + (this.props.limit ? this.props.limit : '20'))
+    fetch(this.baseUrl + 'limit=' + (this.props.limit ? this.props.limit : '20'))
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -51,7 +56,7 @@ export class Events extends React.Component<Props, State> {
     this.setState({
       loadingMore: true
     });
-    fetch('/api/v1/events/get?page=' + (this.state.page + 1))
+    fetch(this.baseUrl + 'page=' + (this.state.page + 1))
       .then(res => res.json())
       .then(data => {
         this.setState((state) => ({
