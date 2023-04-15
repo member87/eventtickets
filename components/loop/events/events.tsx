@@ -76,16 +76,14 @@ export class Events extends React.Component<Props, State> {
                   </div>
                 </div>
                 {this.state.events.length < this.state.count && (
-                <button onClick={this.loadNextPage} className="px-10 py-2 w-fit block border tracking-wide rounded-full mx-auto mt-6 border-slate-700">Load More</button>
+                <button onClick={this.loadNextPage} className="px-28 text-lg font-semibold py-2 w-fit block border tracking-wide rounded-full mx-auto mt-6 border-slate-800 hover:bg-zinc-800 hover:text-white duration-150 transition-all">Load More <i className="fa-solid fa-chevron-down ml-1 text-sm"></i></button>
                 )}
               </>
             )}
           </>
         ) : (
           <div>Loading...</div>
-        )
-
-            }
+        )}
       </div>
     );
   }

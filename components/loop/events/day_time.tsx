@@ -39,7 +39,9 @@ export class EventDayTime extends React.Component<Props, State> {
   render() {
     return (
       <>
-        {this.state.day}  -  {this.state.hour}:{this.state.minute}
+        <span className="flex items-center gap-1">
+        {this.state.day} <i className="fa-solid fa-circle text-[5px] mx-1 opacity-80 text-gray-700"></i> {this.state.hour}:{this.state.minute}
+        </span>
       </>
     );
   }

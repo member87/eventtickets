@@ -66,8 +66,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function EventSingle({eventData, timeString}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <Page>
-      <div className='bg-gray-950 text-white p-5'>
-        <div className="flex gap-2 ">
+      <div className='bg-zinc-900 text-white p-5'>
+        <div className="flex gap-2 flex-wrap mb-3">
           <Link href="/">Home</Link>
           <span>/</span>
           <Link href="/">{eventData.artist.genre.genre}</Link>
