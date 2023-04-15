@@ -47,7 +47,7 @@ export class Header extends React.Component<Props, State> {
       <header className="relative">
         <div className={`fixed top-0 left-0 w-screen h-screen z-50 ease-in-out duration-100 transition-all ${!this.state.isMenuOpen ? "invisible" : ""}`}>
           <div className={`absolute h-full w-full bg-black duration-100 transition-opacity ${!this.state.isMenuOpen ? "opacity-0" : "opacity-50"}`}></div>
-          <div className={`absolute w-full h-full bg-white shadow-lg  md:w-[35rem] duration-100 transition-transform ${this.state.isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+          <div className={`flex flex-col absolute w-full h-full bg-white shadow-lg  md:w-[35rem] duration-200 transition-transform ${this.state.isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className="py-3 px-5 border-b border-slate-400 flex items-center">
               <button className="absolute" onClick={this.toggleMenu}>
                 <i className="fa-solid fa-chevron-left p-3"></i>
@@ -56,7 +56,7 @@ export class Header extends React.Component<Props, State> {
             </div>
 
 
-            <div className="p-3">
+            <div className="p-3 flex-grow">
               <ExpandList label="Music">
                 {this.state.genres && this.state.genres.map((genre) => {
                   return (
@@ -69,6 +69,9 @@ export class Header extends React.Component<Props, State> {
                 <ExpandListItem label={"Recently Added"} href={`/events/`}/>
                 <ExpandListItem label={"View All"} href={`/events/`}/>
               </ExpandList>
+            </div>
+            <div className="bg-slate-100 p-5">
+              <a href="https://github.com/member87/eventtickets">View source on github</a>
             </div>
           </div>
         </div>

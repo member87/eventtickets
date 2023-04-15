@@ -28,7 +28,7 @@ export class ExpandList extends React.Component<Props, State> {
   render() {
     return (
       
-      <div className="expand-list border-b border-slate-400">
+      <div className="expand-list border-b border-slate-400 cursor-pointer">
         <div className={`px-5 py-3 font-semibold flex items-center hover:bg-slate-100 ${this.state.isMenuOpen && "bg-slate-100"}`} onClick={this.toggleMenu}>
           <span className="flex-auto">{this.props.label}</span>
           <button className="">

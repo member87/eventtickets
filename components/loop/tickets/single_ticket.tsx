@@ -24,7 +24,7 @@ export class SigleTicket extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="bg-white shadow m-2 rounded overflow-hidden group flex ">
+      <div className="bg-white shadow m-2 rounded overflow-hidden group flex">
         <div className="flex-auto p-3">
           <div className="">Seat <span className="font-semibold">{this.props.ticket.seat}</span></div>
           <div className="">Full Price Ticket</div>
