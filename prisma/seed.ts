@@ -183,7 +183,7 @@ async function main() {
      * Create random events from aritsts and location. Multiple of same events are created at different locations
      */
     artists[artist].forEach(async (eventName: string) => {
-      for (let i = 0; i < getRandomInt(5) + 1; i++) {
+      for (let i = 0; i < getRandomInt(20) + 1; i++) {
         const location = getRandom(await prisma.location.findMany())
         
         /* generate a random datetime for prismajs DateTime type */

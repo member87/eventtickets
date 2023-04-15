@@ -2,6 +2,7 @@ import React from "react";
 import { ExpandList } from "./expand_list";
 import { Genre } from "@prisma/client";
 import { ExpandListItem } from "./expand_list_item";
+import { HeaderListItem } from "./header_list_item";
 
 type Props = {}
 type State = {
@@ -57,6 +58,7 @@ export class Header extends React.Component<Props, State> {
 
 
             <div className="p-3 flex-grow">
+              <HeaderListItem label="Home" href="/" />
               <ExpandList label="Music">
                 {this.state.genres && this.state.genres.map((genre) => {
                   return (
