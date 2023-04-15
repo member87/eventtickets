@@ -6,6 +6,7 @@ import Link from "next/link";
 type Props = {
   limitList?: boolean,
   limit?: number,
+  genre?: string,
 }
 type State = {
   events: EventLocation[],

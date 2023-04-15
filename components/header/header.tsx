@@ -63,12 +63,17 @@ export class Header extends React.Component<Props, State> {
                     <ExpandListItem label={genre.genre} href={`/genres/${genre.id}`}/>
                   )
                 })}
+                <ExpandListItem label={"View All"} href={`/events/`}/>
               </ExpandList>
-              </div>
+              <ExpandList label="Events">
+                <ExpandListItem label={"Recently Added"} href={`/events/`}/>
+                <ExpandListItem label={"View All"} href={`/events/`}/>
+              </ExpandList>
+            </div>
           </div>
         </div>
         <div className="bg-blue-700 text-white py-3 px-5 text-xl">
-          <button className="" onClick={this.toggleMenu}>
+          <button className="mr-2" onClick={this.toggleMenu}>
             <i className="fa-solid fa-bars"></i>
           </button>
           <span>Event Tickets</span>

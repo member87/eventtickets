@@ -40,6 +40,9 @@ export default async function handler(
     },
     take: limit,
     skip: page * limit,
+    orderBy: {
+      price: "asc"
+    }
   })
 
 

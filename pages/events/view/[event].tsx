@@ -3,6 +3,7 @@ import { prisma } from '@/util/prisma';
 import Link from 'next/link';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { dateToDay, dateToMonth } from '@/util/time';
+import { Tickets } from '@/components/loop/tickets/tickets';
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -13,13 +14,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       id: Number(id)
     },
     select: {
+      id: true,
       name: true,
       artist: {
         select: {
           name: true,
           genre: {
             select: {
-              genre: true
+              genre: true,
+              id: true,
             }
           }
         }
@@ -64,13 +67,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 
 export default function EventSingle({eventData, timeString}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+  
   return (
     <Page>
       <div className='bg-zinc-900 text-white p-5'>
         <div className="flex gap-2 flex-wrap mb-3">
           <Link href="/">Home</Link>
           <span>/</span>
-          <Link href="/">{eventData.artist.genre.genre}</Link>
+          <Link href={`/genres/${eventData.artist.genre.id}`}>{eventData.artist.genre.genre}</Link>
           <span>/</span>
           <Link href="/">{eventData.artist.name}</Link>
         </div>
@@ -78,8 +83,7 @@ export default function EventSingle({eventData, timeString}: InferGetServerSideP
         <span className="text-sm">{timeString}</span>
         <div className="text-sm">{eventData.location.venue}, {eventData.location.city}, {eventData.location.country}</div>
       </div>
-      <div className='sm:m-3 p-2'>
-      </div>
+      <Tickets eventId={eventData.id} />
     </Page>
   )
 }
