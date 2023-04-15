@@ -4,7 +4,8 @@ import { SingleEvent } from "./single_event";
 import Link from "next/link";
 
 type Props = {
-  limitList?: boolean
+  limitList?: boolean,
+  limit?: number,
 }
 type State = {
   events: EventLocation[],
@@ -31,7 +32,7 @@ export class Events extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    fetch('/api/v1/events/get')
+    fetch('/api/v1/events/get?limit=' + (this.props.limit ? this.props.limit : '20'))
       .then(res => res.json())
       .then(data => {
         console.log(data)

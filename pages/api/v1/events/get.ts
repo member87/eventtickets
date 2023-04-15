@@ -30,9 +30,11 @@ export default async function handler(
   res: NextApiResponse<ReturnType>
 ) {
 
-  const limit = 20;
   let page = Number(req.query.page);
   if(!page) page = 0;
+
+  let limit = Number(req.query.limit);
+  if(!limit) page = 20;
 
 
   const events = await prisma.event.findMany({
