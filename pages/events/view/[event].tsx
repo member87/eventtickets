@@ -76,6 +76,7 @@ export default function EventSingle({eventData, timeString}: InferGetServerSideP
         </div>
         <h1 className='text-xl font-semibold my-1'>{eventData.artist.name}: {eventData.name}</h1>
         <span className="text-sm">{timeString}</span>
+        <div className="text-sm">{eventData.location.venue}, {eventData.location.city}, {eventData.location.country}</div>
       </div>
       <div className='sm:m-3 p-2'>
       </div>
