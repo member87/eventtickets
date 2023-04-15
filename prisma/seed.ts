@@ -147,9 +147,8 @@ async function main() {
         /* generate a random datetime for prismajs DateTime type */
         const date = new Date(+(new Date()) + Math.floor(Math.random()*10000000000));
 
-
-
-        await prisma.event.upsert({
+        /* Add event */
+        const event = await prisma.event.upsert({
           where: {
             event_identifier: {
               locationId: location.id,
@@ -165,6 +164,26 @@ async function main() {
             time: date
           }
         })
+
+        /* Add tickets */
+        for(let i = 0; i < getRandomInt(200) + 1; i++) {
+          const seat = String.fromCharCode(65 + getRandomInt(26)) + (getRandomInt(10) + 1)
+          await prisma.ticket.upsert({
+            where: {
+              ticket_identifier: {
+                eventId: event.id,
+                seat: seat
+              }
+            },
+            update: {},
+            create: {
+              eventId: event.id,
+              seat: seat,
+              price: getRandomInt(100000) + 1,
+            }
+          })
+        }
+
       }
     })
 
