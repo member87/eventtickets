@@ -30,10 +30,10 @@ export default async function handler(
 
   let page = Number(req.query.page);
   if(!page) {
-    page = 1;
+    page = 0;
   }
-  const limit = 10;
 
+  const limit = 10;
   const tickets = await prisma.ticket.findMany({
     where: {
       eventId: Number(evnetId)
@@ -44,7 +44,6 @@ export default async function handler(
       price: "asc"
     }
   })
-
 
   res.status(200).json({tickets})
 }

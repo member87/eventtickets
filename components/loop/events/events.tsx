@@ -62,7 +62,7 @@ export class Events extends React.Component<Props, State> {
           <>
             {this.state.events.map((event: EventLocation) => {
               return (
-                <SingleEvent event={event} />
+                <SingleEvent event={event} key={event.id} />
               )
             })}
             {this.props.limitList ? (

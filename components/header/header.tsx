@@ -60,7 +60,7 @@ export class Header extends React.Component<Props, State> {
               <ExpandList label="Music">
                 {this.state.genres && this.state.genres.map((genre) => {
                   return (
-                    <ExpandListItem label={genre.genre} href={`/genres/${genre.id}`}/>
+                    <ExpandListItem label={genre.genre} href={`/genres/${genre.id}`} key={genre.id}/>
                   )
                 })}
                 <ExpandListItem label={"View All"} href={`/events/`}/>

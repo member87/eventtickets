@@ -45,7 +45,7 @@ export class Tickets extends React.Component<Props, State> {
       <div className="">
         {this.state && this.state.tickets.map((ticket) => {
           return (
-            <SigleTicket ticket={ticket} />
+            <SigleTicket ticket={ticket} key={ticket.id} />
           );
         })
         }

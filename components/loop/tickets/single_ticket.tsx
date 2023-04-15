@@ -28,7 +28,7 @@ export class SigleTicket extends React.Component<Props, State> {
         <div className="flex-auto p-3">
           <div className="">Seat <span className="font-semibold">{this.props.ticket.seat}</span></div>
           <div className="">Full Price Ticket</div>
-          <div className="font-semibold text-blue-800 font-thin">{this.state.price}</div>
+          <div className="text-blue-800 font-thin">{this.state.price}</div>
         </div>
 
         <div className="bg-blue-600 flex justify-center items-center duration-150 ease-in-out translate-x-full group-hover:translate-x-0">
