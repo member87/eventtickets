@@ -40,7 +40,7 @@ export class Tickets extends React.Component<Props, State> {
      * Get last elemnt inside react ref 
      * If the last element is visible, load more
      */
-    const lastElement = this.scrollRef.current.lastElementChild;
+    const lastElement = this.scrollRef.current.lastElementChild as HTMLElement;
     if(!lastElement) return;
     const lastElementOffset = lastElement.offsetTop + lastElement.clientHeight;
     const pageOffset = window.pageYOffset + window.innerHeight;
