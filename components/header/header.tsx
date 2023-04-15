@@ -45,9 +45,9 @@ export class Header extends React.Component<Props, State> {
   render() {
     return (
       <header className="relative">
-        <div className={`absolute top-0 left-0 w-screen h-screen z-50 ease-in-out duration-150 ${this.state.isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-          <div className="absolute h-full w-full bg-black opacity-50 d-none"></div>
-          <div className="absolute w-full h-full bg-white shadow-lg">
+        <div className={`fixed top-0 left-0 w-screen h-screen z-50 ease-in-out duration-100 transition-all ${!this.state.isMenuOpen ? "invisible" : ""}`}>
+          <div className={`absolute h-full w-full bg-black duration-100 transition-opacity ${!this.state.isMenuOpen ? "opacity-0" : "opacity-50"}`}></div>
+          <div className={`absolute w-full h-full bg-white shadow-lg  md:w-[35rem] duration-100 transition-transform ${this.state.isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className="py-3 px-5 border-b border-slate-400 flex items-center">
               <button className="absolute" onClick={this.toggleMenu}>
                 <i className="fa-solid fa-chevron-left p-3"></i>
