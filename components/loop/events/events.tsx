@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {  EventLocation } from "@/api/v1/events/get";
 import { SingleEvent } from "./single_event";
 import Link from "next/link";
+import { Spinner } from "@/components/global/spinner";
 
 type Props = {
   limitList?: boolean,
@@ -13,6 +14,7 @@ type State = {
   loaded: boolean,
   count: number,
   page: number,
+  loadingMore: boolean,
 }
 
 
@@ -26,6 +28,7 @@ export class Events extends React.Component<Props, State> {
       loaded: false,
       count: 0,
       page: 0,
+      loadingMore: false,
     };
 
 
@@ -45,12 +48,16 @@ export class Events extends React.Component<Props, State> {
   }
 
   loadNextPage(): void {
+    this.setState({
+      loadingMore: true
+    });
     fetch('/api/v1/events/get?page=' + (this.state.page + 1))
       .then(res => res.json())
       .then(data => {
         this.setState((state) => ({
           events: state.events.concat(data.events),
-          page: state.page + 1
+          page: state.page + 1,
+          loadingMore: false
         }))
       });
   }
@@ -69,6 +76,10 @@ export class Events extends React.Component<Props, State> {
               <Link href="/events" className="px-10 py-2 w-fit block border uppercase tracking-wide rounded-full mx-auto mt-6 border-slate-700">View all {this.state.count} events</Link>
             ) : (
               <>
+                {this.state.loadingMore && (
+                  <Spinner />
+                )}
+
                 <div className="text-gray-800 flex flex-col items-center mt-6">
                   <span>Loaded {this.state.events.length} out of {this.state.count} events</span>
                   <div className="bg-gray-200 w-full h-1 my-2 max-w-xs rounded-full">
@@ -78,11 +89,14 @@ export class Events extends React.Component<Props, State> {
                 {this.state.events.length < this.state.count && (
                 <button onClick={this.loadNextPage} className="px-28 text-lg font-semibold py-2 w-fit block border tracking-wide rounded-full mx-auto mt-6 border-slate-800 hover:bg-zinc-800 hover:text-white duration-150 transition-all">Load More <i className="fa-solid fa-chevron-down ml-1 text-sm"></i></button>
                 )}
+                
               </>
             )}
           </>
         ) : (
-          <div>Loading...</div>
+          <div className="py-8">
+            <Spinner />
+          </div>
         )}
       </div>
     );

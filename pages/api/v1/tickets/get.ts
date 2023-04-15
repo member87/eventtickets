@@ -6,6 +6,7 @@ import { Prisma, Ticket } from '@prisma/client'
 
 type returnData = {
   tickets?: Ticket[]
+  count?: number
   error?: string
 }
 
@@ -45,5 +46,12 @@ export default async function handler(
     }
   })
 
-  res.status(200).json({tickets})
+  const count = await prisma.ticket.count({
+    where: {
+      eventId: Number(evnetId)
+    }
+  })
+
+
+  res.status(200).json({tickets, count})
 }
