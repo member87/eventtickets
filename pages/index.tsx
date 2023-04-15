@@ -9,7 +9,7 @@ export default function Home({}) {
     <Page>
       <div className='sm:m-3 p-2'>
         <h1 className='text-3xl font-bold my-5 opacity-70'>Upcoming Events</h1>
-        <Events />
+        <Events limitList />
       </div>
     </Page>
   )

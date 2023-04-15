@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-export default function Home({eventData, timeString}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function EventSingle({eventData, timeString}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <Page>
       <div className='bg-gray-950 text-white p-5'>
@@ -74,8 +74,8 @@ export default function Home({eventData, timeString}: InferGetServerSidePropsTyp
           <span>/</span>
           <Link href="/">{eventData.artist.name}</Link>
         </div>
-        <h1 className='text-xl font-semibold my-2'>{eventData.artist.name}: {eventData.name}</h1>
-        <span>{timeString}</span>
+        <h1 className='text-xl font-semibold my-1'>{eventData.artist.name}: {eventData.name}</h1>
+        <span className="text-sm">{timeString}</span>
       </div>
       <div className='sm:m-3 p-2'>
       </div>

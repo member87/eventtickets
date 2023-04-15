@@ -29,6 +29,11 @@ export default async function handler(
   res: NextApiResponse<ReturnType>
 ) {
 
+  const limit = 10;
+  let page = Number(req.query.page);
+  if(!page) page = 0;
+
+
   const events = await prisma.event.findMany({
     select: {
       name: true,
@@ -45,7 +50,8 @@ export default async function handler(
     orderBy: {
       time: 'asc',
     },
-    take: 4,
+    take: limit,
+    skip: page * limit,
   })
 
   const count = await prisma.event.count()
