@@ -69,7 +69,7 @@ export class Events extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="bg-white shadow-xl pb-5">
+      <div className="bg-white shadow pb-5">
         {this.state.loaded ? (
           <>
             {this.state.events.map((event: EventLocation) => {
