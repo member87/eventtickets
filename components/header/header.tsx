@@ -77,7 +77,7 @@ export class Header extends React.Component<Props, State> {
             </div>
           </div>
         </div>
-        <div className="bg-blue-700 text-white py-3 px-5 text-xl">
+        <div className="bg-gradient-to-r from-blue-800 via-blue-600 to-blue-800 text-white py-3 px-5 text-xl">
           <button className="mr-2" onClick={this.toggleMenu}>
             <i className="fa-solid fa-bars"></i>
           </button>
