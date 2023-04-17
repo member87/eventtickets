@@ -19,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       artist: {
         select: {
           name: true,
+          image: true,
           genre: {
             select: {
               genre: true,
@@ -71,17 +72,28 @@ export default function EventSingle({eventData, timeString}: InferGetServerSideP
   
   return (
     <Page>
-      <div className='bg-zinc-900 text-white p-5'>
-        <div className="flex gap-2 flex-wrap mb-3">
-          <Link href="/">Home</Link>
-          <span>/</span>
-          <Link href={`/genres/${eventData.artist.genre.id}`}>{eventData.artist.genre.genre}</Link>
-          <span>/</span>
-          <Link href="/">{eventData.artist.name}</Link>
+      <div className='bg-zinc-900 text-white p-5 relative overflow-hidden' >
+        <div className="absolute top-0 left-0 w-full h-full blur bg-cover bg-center" style={{backgroundImage: `url("${eventData.artist.image}")`}}></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+        <div className="relative">
+          <div className="flex gap-2 flex-wrap mb-3">
+            <Link href="/">Home</Link>
+            <span>/</span>
+            <Link href={`/genres/${eventData.artist.genre.id}`}>{eventData.artist.genre.genre}</Link>
+            <span>/</span>
+            <Link href="/">{eventData.artist.name}</Link>
+          </div>
+          <div className="flex gap-4">
+            <div className='pt-2 hidden sm:block'>
+              <img src={eventData.artist.image} className="w-32 h-16 rounded object-cover shadow-2xl" />
+            </div>
+            <div>
+              <h1 className='text-xl font-semibold my-1'>{eventData.artist.name}: {eventData.name}</h1>
+              <span className="text-sm">{timeString}</span>
+              <div className="text-sm">{eventData.location.venue}, {eventData.location.city}, {eventData.location.country}</div>
+            </div>
+          </div>
         </div>
-        <h1 className='text-xl font-semibold my-1'>{eventData.artist.name}: {eventData.name}</h1>
-        <span className="text-sm">{timeString}</span>
-        <div className="text-sm">{eventData.location.venue}, {eventData.location.city}, {eventData.location.country}</div>
       </div>
       <Tickets eventId={eventData.id} />
     </Page>
