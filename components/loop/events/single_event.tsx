@@ -27,7 +27,7 @@ export class SingleEvent extends React.Component<Props, State> {
           <div className="font-bold">{this.props.event.name}</div>
           <div>{this.props.event.location.city}  -  {this.props.event.location.venue}</div>
         </div>
-        <Link href={"/events/view/" + this.props.event.id} className="shrink-0 shadow w-10 h-10 flex justify-center items-center rounded-full bg-blue-600 text-white hover:bg-blue-900 duration-75 transition-all"><i className="fa-light fa-chevron-right"></i></Link>
+        <Link href={"/events/view/" + this.props.event.id} className="shrink-0 shadow w-10 h-10 flex justify-center items-center rounded-full bg-blue-600 text-white hover:bg-blue-900 duration-75 transition-all"><i className="fa-solid fa-chevron-right"></i></Link>
         
       </Link>
     );
