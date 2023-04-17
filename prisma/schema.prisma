@@ -53,7 +53,7 @@ model Ticket {
 model Artist {
   id      Int    @id @default(autoincrement())
   name    String @unique
-  image   String
+  image   String @db.VarChar(500)
   genre Genre  @relation(fields: [genreId], references: [id])
   genreId Int
   event   Event[]
