@@ -9,6 +9,7 @@ import { Tickets } from '@/components/loop/tickets/tickets';
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.event;
 
+  
   const eventData = await prisma.event.findUnique({
     where: {
       id: Number(id)
