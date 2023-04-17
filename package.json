@@ -11,7 +11,7 @@
     "start": "next start",
     "lint": "next lint",
     "dbclear": "npx prisma db push --force-reset && npx prisma db seed",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "vercel-build": "prisma generate && next build"
   },
   "dependencies": {
     "@prisma/client": "^4.12.0",
